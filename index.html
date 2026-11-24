@@ -33,7 +33,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logótipo do Projeto -->
-                <a href="#" class="flex items-center gap-2.5 font-bold text-xl text-slate-900 dark:text-white">
+                <a href="#inicio" onclick="switchPage('home')" class="flex items-center gap-2.5 font-bold text-xl text-slate-900 dark:text-white">
                     <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
@@ -43,12 +43,16 @@
                 </a>
 
                 <!-- Navegação Desktop -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#inicio" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Início</a>
-                    <a href="#como-funciona" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Como Funciona</a>
-                    <a href="#simulador" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Simulador</a>
-                    <a href="#arquitetura" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Arquitetura & Materiais</a>
-                    <a href="#sobre-pap" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Sobre a PAP</a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <button type="button" onclick="switchPage('home')" data-nav="home" class="nav-link text-sm font-semibold text-emerald-600 dark:text-emerald-400 transition-colors">
+                        Início
+                    </button>
+                    <button type="button" onclick="switchPage('calendar')" data-nav="calendar" class="nav-link text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                        Calendário & Consumo
+                    </button>
+                    <a href="#como-funciona" onclick="switchPage('home')" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Como Funciona</a>
+                    <a href="#simulador" onclick="switchPage('home')" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Simulador</a>
+                    <a href="#arquitetura" onclick="switchPage('home')" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Materiais</a>
                 </nav>
 
                 <!-- Ações no Canto Superior Direito (Botão Tema Claro/Noturno + CTA + Menu Mobile) -->
@@ -64,9 +68,9 @@
                         </svg>
                     </button>
 
-                    <a href="#simulador" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
-                        Testar Demonstração
-                    </a>
+                    <button type="button" onclick="switchPage('calendar')" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
+                        Ver Calendário
+                    </button>
 
                     <!-- Botão Menu Mobile -->
                     <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none" aria-label="Abrir menu">
@@ -80,237 +84,360 @@
 
         <!-- Menu Mobile -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-2">
-            <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Início</a>
-            <a href="#como-funciona" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Como Funciona</a>
-            <a href="#simulador" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Simulador</a>
-            <a href="#arquitetura" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Arquitetura & Materiais</a>
-            <a href="#sobre-pap" class="block px-3 py-2 rounded-md text-base font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-slate-800">Sobre a PAP</a>
+            <button type="button" onclick="switchPage('home')" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Início</button>
+            <button type="button" onclick="switchPage('calendar')" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-emerald-600 dark:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-800">Calendário & Consumo</button>
+            <a href="#como-funciona" onclick="switchPage('home')" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Como Funciona</a>
+            <a href="#simulador" onclick="switchPage('home')" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Simulador</a>
+            <a href="#arquitetura" onclick="switchPage('home')" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Materiais</a>
         </div>
     </header>
 
     <!-- Conteúdo Principal -->
     <main class="flex-grow">
-        <!-- Secção Hero com a Imagem como Fundo -->
-        <section id="inicio" class="hero-bg py-24 sm:py-36 px-4 sm:px-6 lg:px-8 text-center text-white">
-            <div class="max-w-4xl mx-auto">
-                <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wider uppercase mb-6 backdrop-blur-sm">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Prova de Aptidão Profissional (PAP)
-                </span>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
-                    Alimentação inteligente e rigorosa para o seu <span class="text-emerald-400">gato</span>
-                </h1>
-                <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-                    O <strong>PetFeed Auto</strong> é um dispensador automático de ração construído com estrutura em PVC, caixa organizada com cablagem oculta e eletrónica programável, libertando a dose exata nos horários escolhidos.
-                </p>
-                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#simulador" class="px-7 py-3.5 text-base font-semibold text-white bg-emerald-600 rounded-xl hover:bg-emerald-500 transition-all shadow-lg">
-                        Experimentar Simulador Interativo
-                    </a>
-                    <a href="#arquitetura" class="px-7 py-3.5 text-base font-medium text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-xl backdrop-blur-sm transition-all">
-                        Ver Materiais e Eletrónica
-                    </a>
-                </div>
-            </div>
-        </section>
 
-        <!-- Secção Como Funciona -->
-        <section id="como-funciona" class="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Como Funciona o Sistema</h2>
-                    <p class="mt-4 text-slate-600 dark:text-slate-400">Uma montagem limpa e acessível, com caixa fechada e fios escondidos, que combina estrutura em PVC com controlo eletrónico preciso.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Passo 1 -->
-                    <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
-                            1
-                        </div>
-                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Agendamento de Horários</h3>
-                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                            O utilizador define as horas exatas das refeições (ex: 08:00, 14:00 e 20:00). Um módulo relógio de tempo real (RTC) mantém a hora certa mesmo sem corrente.
-                        </p>
-                    </div>
-
-                    <!-- Passo 2 -->
-                    <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
-                            2
-                        </div>
-                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Doseamento por Quantidade</h3>
-                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                            Escolha a porção em gramas (ex: 30g a 100g). O motor aciona o mecanismo doseador no interior da tubagem durante o tempo calibrado para a quantidade escolhida.
-                        </p>
-                    </div>
-
-                    <!-- Passo 3 -->
-                    <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
-                            3
-                        </div>
-                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Queda por Gravidade na Taça</h3>
-                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                            A ração armazenada no reservatório superior desce pela tubagem de PVC diretamente para o comedouro, mantendo os grãos secos e protegidos.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Secção Simulador Interativo -->
-        <section id="simulador" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-slate-800">
-                <div class="max-w-3xl mb-10">
-                    <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Demonstração Prática</span>
-                    <h2 class="text-3xl font-bold mt-1">Simulador de Programação do Dispensador</h2>
-                    <p class="mt-3 text-slate-400 text-sm sm:text-base">
-                        Experimente configurar um horário e a quantidade de ração em gramas como faria no painel de controlo do projeto.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    <!-- Painel de Configuração -->
-                    <form id="feeder-form" class="lg:col-span-5 bg-slate-800/80 p-6 rounded-2xl border border-slate-700 space-y-5">
-                        <div>
-                            <label for="meal-name" class="block text-sm font-medium text-slate-300 mb-1.5">Nome da Refeição</label>
-                            <input type="text" id="meal-name" value="Pequeno-Almoço" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-600 text-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-
-                        <div>
-                            <label for="meal-time" class="block text-sm font-medium text-slate-300 mb-1.5">Horário Programado</label>
-                            <input type="time" id="meal-time" value="08:30" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-600 text-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between text-sm mb-1.5">
-                                <label for="meal-grams" class="font-medium text-slate-300">Quantidade de Ração</label>
-                                <span id="grams-display" class="font-bold text-emerald-400">45 g</span>
-                            </div>
-                            <input type="range" id="meal-grams" min="10" max="150" step="5" value="45" class="w-full accent-emerald-500 cursor-pointer">
-                            <div class="flex justify-between text-xs text-slate-500 mt-1">
-                                <span>10g (Lanche)</span>
-                                <span>80g (Média)</span>
-                                <span>150g (Máx)</span>
-                            </div>
-                        </div>
-
-                        <div class="pt-2 flex flex-col sm:flex-row gap-3">
-                            <button type="submit" class="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition-colors">
-                                + Agendar Horário
-                            </button>
-                            <button type="button" id="dispense-now-btn" class="py-3 px-4 bg-slate-700 hover:bg-slate-600 text-emerald-300 font-medium rounded-xl transition-colors border border-slate-600">
-                                Libertar Agora
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Estado do Pote & Lista de Horários -->
-                    <div class="lg:col-span-7 space-y-6">
-                        <!-- Visor Digital Simulado -->
-                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <div>
-                                <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Estado do Sistema</p>
-                                <p id="system-status" class="text-lg font-semibold text-emerald-400 mt-1">Em espera — Próxima dose programada</p>
-                            </div>
-                            <div class="text-right bg-slate-900 px-4 py-2.5 rounded-xl border border-slate-800">
-                                <p class="text-xs text-slate-400">Total Diário Programado</p>
-                                <p id="total-daily" class="text-2xl font-bold text-white">125 g</p>
-                            </div>
-                        </div>
-
-                        <!-- Tabela de Horários Ativos -->
-                        <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
-                            <div class="px-6 py-4 border-b border-slate-700 flex justify-between items-center">
-                                <h3 class="font-semibold text-slate-200">Horários Programados no Pote</h3>
-                                <span class="text-xs text-slate-400">Ativo</span>
-                            </div>
-                            <ul id="schedule-list" class="divide-y divide-slate-700/70">
-                                <!-- Itens iniciais inseridos via JS -->
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Secção Arquitetura & Materiais -->
-        <section id="arquitetura" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Arquitetura e Materiais do Projeto</h2>
-                    <p class="mt-4 text-slate-600 dark:text-slate-400">Construção limpa e de baixo custo com materiais comuns, caixa estruturada e fios escondidos no interior.</p>
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
-                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Controlador</span>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Arduino / Microcontrolador</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Cérebro do sistema responsável por ler o relógio, gerir a programação e acionar o motor na hora certa.</p>
-                    </div>
-
-                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
-                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Atuador</span>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Servo Motor / Motor</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Aciona o mecanismo doseador no interior da tubagem para libertar a quantidade definida em gramas.</p>
-                    </div>
-
-                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
-                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Precisão Temporal</span>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Módulo RTC</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Relógio de tempo real que mantém a hora exata mesmo em caso de falha de alimentação.</p>
-                    </div>
-
-                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
-                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Acabamento & PVC</span>
-                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Tubagem PVC & Caixa Fechada</h3>
-                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Tubos de PVC, depósito de ração e caixa com fios escondidos e encaixes limpos, sem marcas de cola visíveis.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Secção Sobre a PAP -->
-        <section id="sobre-pap" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-emerald-600 rounded-3xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-10 shadow-lg">
-                <div class="max-w-2xl">
-                    <span class="inline-block px-3 py-1 rounded-full bg-emerald-700 text-emerald-100 text-xs font-semibold uppercase mb-3">
-                        Contexto Escolar
+        <!-- ========================================================= -->
+        <!-- PÁGINA 1: PROJETO PRINCIPAL (INÍCIO, SIMULADOR, MATERIAIS) -->
+        <!-- ========================================================= -->
+        <div id="page-home">
+            <!-- Secção Hero com a Imagem como Fundo -->
+            <section id="inicio" class="hero-bg py-24 sm:py-36 px-4 sm:px-6 lg:px-8 text-center text-white">
+                <div class="max-w-4xl mx-auto">
+                    <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wider uppercase mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Prova de Aptidão Profissional (PAP)
                     </span>
-                    <h2 class="text-3xl font-bold mb-4">Sobre esta Prova de Aptidão Profissional</h2>
-                    <p class="text-emerald-50 leading-relaxed mb-6">
-                        Este projeto foi concebido e desenvolvido no âmbito da Prova de Aptidão Profissional (PAP), aplicando conhecimentos de eletrónica, programação e automação para criar um protótipo funcional, bem acabado e económico.
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm">
+                        Alimentação inteligente e rigorosa para o seu <span class="text-emerald-400">gato</span>
+                    </h1>
+                    <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
+                        O <strong>PetFeed Auto</strong> é um dispensador automático de ração construído com estrutura em PVC, caixa organizada com cablagem oculta e eletrónica programável, libertando a dose exata nos horários escolhidos.
                     </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-100">
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                            Acabamento limpo com fios ocultos
+                    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#simulador" class="px-7 py-3.5 text-base font-semibold text-white bg-emerald-600 rounded-xl hover:bg-emerald-500 transition-all shadow-lg">
+                            Experimentar Simulador Interativo
+                        </a>
+                        <button type="button" onclick="switchPage('calendar')" class="px-7 py-3.5 text-base font-medium text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-xl backdrop-blur-sm transition-all">
+                            Abrir Calendário de Consumo
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secção Como Funciona -->
+            <section id="como-funciona" class="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Como Funciona o Sistema</h2>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400">Uma montagem limpa e acessível, com caixa fechada e fios escondidos, que combina estrutura em PVC com controlo eletrónico preciso.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
+                                1
+                            </div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Agendamento de Horários</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                O utilizador define as horas exatas das refeições (ex: 08:00, 14:00 e 20:00). Um módulo relógio de tempo real (RTC) mantém a hora certa mesmo sem corrente.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                            Autonomia para ausências e viagens
+
+                        <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
+                                2
+                            </div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Doseamento por Quantidade</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                Escolha a porção em gramas (ex: 30g a 100g). O motor aciona o mecanismo doseador no interior da tubagem durante o tempo calibrado para a quantidade escolhida.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                            Controlo rigoroso de porções (gramas)
+
+                        <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
+                                3
+                            </div>
+                            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Queda por Gravidade na Taça</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                                A ração armazenada no reservatório superior desce pela tubagem de PVC diretamente para o comedouro, mantendo os grãos secos e protegidos.
+                            </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                            Materiais acessíveis e fáceis de manter
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secção Simulador Interativo -->
+            <section id="simulador" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-xl border border-slate-800">
+                    <div class="max-w-3xl mb-10">
+                        <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Demonstração Prática</span>
+                        <h2 class="text-3xl font-bold mt-1">Simulador de Programação do Dispensador</h2>
+                        <p class="mt-3 text-slate-400 text-sm sm:text-base">
+                            Experimente configurar um horário e a quantidade de ração em gramas ou libertar uma dose agora (o registo fica refletido no calendário de consumo).
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <!-- Painel de Configuração -->
+                        <form id="feeder-form" class="lg:col-span-5 bg-slate-800/80 p-6 rounded-2xl border border-slate-700 space-y-5">
+                            <div>
+                                <label for="meal-name" class="block text-sm font-medium text-slate-300 mb-1.5">Nome da Refeição</label>
+                                <input type="text" id="meal-name" value="Pequeno-Almoço" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-600 text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <div>
+                                <label for="meal-time" class="block text-sm font-medium text-slate-300 mb-1.5">Horário Programado</label>
+                                <input type="time" id="meal-time" value="08:30" required class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-600 text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm mb-1.5">
+                                    <label for="meal-grams" class="font-medium text-slate-300">Quantidade de Ração</label>
+                                    <span id="grams-display" class="font-bold text-emerald-400">45 g</span>
+                                </div>
+                                <input type="range" id="meal-grams" min="10" max="150" step="5" value="45" class="w-full accent-emerald-500 cursor-pointer">
+                                <div class="flex justify-between text-xs text-slate-500 mt-1">
+                                    <span>10g (Lanche)</span>
+                                    <span>80g (Média)</span>
+                                    <span>150g (Máx)</span>
+                                </div>
+                            </div>
+
+                            <div class="pt-2 flex flex-col sm:flex-row gap-3">
+                                <button type="submit" class="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl transition-colors">
+                                    + Agendar Horário
+                                </button>
+                                <button type="button" id="dispense-now-btn" class="py-3 px-4 bg-slate-700 hover:bg-slate-600 text-emerald-300 font-medium rounded-xl transition-colors border border-slate-600">
+                                    Libertar Agora
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Estado do Pote & Lista de Horários -->
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <div>
+                                    <p class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Estado do Sistema</p>
+                                    <p id="system-status" class="text-lg font-semibold text-emerald-400 mt-1">Em espera — Próxima dose programada</p>
+                                </div>
+                                <div class="text-right bg-slate-900 px-4 py-2.5 rounded-xl border border-slate-800">
+                                    <p class="text-xs text-slate-400">Total Diário Programado</p>
+                                    <p id="total-daily" class="text-2xl font-bold text-white">125 g</p>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/50 rounded-2xl border border-slate-700 overflow-hidden">
+                                <div class="px-6 py-4 border-b border-slate-700 flex justify-between items-center">
+                                    <h3 class="font-semibold text-slate-200">Horários Programados no Pote</h3>
+                                    <span class="text-xs text-slate-400">Ativo</span>
+                                </div>
+                                <ul id="schedule-list" class="divide-y divide-slate-700/70">
+                                    <!-- Itens iniciais inseridos via JS -->
+                                </ul>
+                            </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Secção Arquitetura & Materiais -->
+            <section id="arquitetura" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Arquitetura e Materiais do Projeto</h2>
+                        <p class="mt-4 text-slate-600 dark:text-slate-400">Construção limpa e de baixo custo com materiais comuns, caixa estruturada e fios escondidos no interior.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Controlador</span>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Arduino / Microcontrolador</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Cérebro do sistema responsável por ler o relógio, gerir a programação e acionar o motor na hora certa.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Atuador</span>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Servo Motor / Motor</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Aciona o mecanismo doseador no interior da tubagem para libertar a quantidade definida em gramas.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Precisão Temporal</span>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Módulo RTC</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Relógio de tempo real que mantém a hora exata mesmo em caso de falha de alimentação.</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Acabamento & PVC</span>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Tubagem PVC & Caixa Fechada</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Tubos de PVC, depósito de ração e caixa com fios escondidos e encaixes limpos, sem marcas de cola visíveis.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- PÁGINA 2: CALENDÁRIO DE CONSUMO (SEMANAL, MENSAL E DIAS)  -->
+        <!-- ========================================================= -->
+        <div id="page-calendar" class="hidden py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <!-- Cabeçalho da Página do Calendário -->
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <button type="button" onclick="switchPage('home')" class="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                            Voltar ao Início
+                        </button>
+                        <span class="text-slate-300 dark:text-slate-700">•</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Histórico de Ração</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
+                        Calendário de Consumo do Gato
+                    </h1>
+                    <p class="mt-2 text-slate-600 dark:text-slate-400 text-sm sm:text-base">
+                        Acompanhe os dias do mês, clique num dia para ver as doses e consulte o total consumido na semana ou no mês.
+                    </p>
+                </div>
+
+                <!-- Navegação de Mês -->
+                <div class="flex items-center gap-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2 rounded-2xl shadow-sm self-start md:self-auto">
+                    <button id="prev-month-btn" type="button" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors" aria-label="Mês anterior">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <span id="calendar-month-title" class="min-w-[160px] text-center font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+                        Novembro 2026
+                    </span>
+                    <button id="next-month-btn" type="button" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-colors" aria-label="Mês seguinte">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Cartões de Resumo (Dia Selecionado, Semana e Mês) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Dia Selecionado</span>
+                        <span id="selected-day-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">24 Nov</span>
+                    </div>
+                    <p id="selected-day-grams" class="text-3xl font-extrabold text-slate-900 dark:text-white mt-3">125 g</p>
+                    <p id="selected-day-meals" class="text-xs text-slate-500 dark:text-slate-400 mt-1">3 doses registadas neste dia</p>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total na Semana</span>
+                        <span id="week-range-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400">Semana do dia selecionado</span>
+                    </div>
+                    <p id="week-total-grams" class="text-3xl font-extrabold text-slate-900 dark:text-white mt-3">875 g</p>
+                    <p id="week-avg-text" class="text-xs text-slate-500 dark:text-slate-400 mt-1">Média diária: ~125 g / dia</p>
+                </div>
+
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Total no Mês</span>
+                        <span id="month-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">Novembro</span>
+                    </div>
+                    <p id="month-total-grams" class="text-3xl font-extrabold text-slate-900 dark:text-white mt-3">3 000 g</p>
+                    <p id="month-days-text" class="text-xs text-slate-500 dark:text-slate-400 mt-1">Acumulado dos dias registados</p>
+                </div>
+            </div>
+
+            <!-- Grelha Principal: Calendário Mensal + Detalhe do Dia & Registo -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Calendário de Dias (7 colunas) -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+                    <div class="flex items-center justify-between mb-5">
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Calendário Mensal de Dias</h2>
+                        <span class="text-xs text-slate-500 dark:text-slate-400">Clique num dia para ver detalhes</span>
+                    </div>
+
+                    <!-- Dias da Semana -->
+                    <div class="grid grid-cols-7 gap-1.5 text-center text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2">
+                        <div>Seg</div>
+                        <div>Ter</div>
+                        <div>Qua</div>
+                        <div>Qui</div>
+                        <div>Sex</div>
+                        <div>Sáb</div>
+                        <div>Dom</div>
+                    </div>
+
+                    <!-- Dias Gerados via JS -->
+                    <div id="calendar-grid" class="grid grid-cols-7 gap-1.5 sm:gap-2"></div>
+
+                    <!-- Resumo Semanal Detalhado -->
+                    <div class="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200">Consumo Dia a Dia da Semana Selecionada</h3>
+                            <span id="week-summary-total" class="text-sm font-extrabold text-emerald-600 dark:text-emerald-400">875 g</span>
+                        </div>
+                        <div id="week-days-breakdown" class="grid grid-cols-7 gap-1.5 text-center"></div>
                     </div>
                 </div>
 
-                <div class="w-full lg:w-auto flex-shrink-0">
-                    <div class="bg-emerald-700/70 border border-emerald-400/30 rounded-2xl p-6 text-center min-w-[240px]">
-                        <p class="text-xs uppercase tracking-wider text-emerald-200 font-semibold">Ano Letivo</p>
-                        <p class="text-3xl font-bold mt-1">2026 / 2027</p>
-                        <p class="text-xs text-emerald-200 mt-2">Apresentação Final — PAP</p>
+                <!-- Detalhes do Dia & Registar Dose Manual (5 colunas) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Detalhes do Dia Selecionado -->
+                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Detalhes do Dia</p>
+                                <h2 id="detail-date-title" class="text-xl font-bold text-slate-900 dark:text-white mt-0.5">24 de Novembro de 2026</h2>
+                            </div>
+                            <span id="detail-total-pill" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold text-sm">
+                                125 g
+                            </span>
+                        </div>
+
+                        <ul id="detail-meals-list" class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+                            <!-- Doses do dia inseridas via JS -->
+                        </ul>
                     </div>
+
+                    <!-- Formulário para Adicionar Consumo num Dia -->
+                    <form id="add-log-form" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm space-y-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Registar Dose Consumida</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Adicione uma porção ao dia selecionado ou a outra data.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="log-date" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Data</label>
+                                <input type="date" id="log-date" required class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="log-time" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Hora</label>
+                                <input type="time" id="log-time" value="18:00" required class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="log-label" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Refeição / Motivo</label>
+                                <input type="text" id="log-label" value="Dose Extra" required class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label for="log-grams" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Quantidade (g)</label>
+                                <input type="number" id="log-grams" min="5" max="500" step="5" value="35" required class="w-full px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm rounded-xl transition-colors shadow-sm">
+                            + Guardar no Calendário
+                        </button>
+                    </form>
                 </div>
             </div>
-        </section>
+        </div>
+
     </main>
 
     <!-- Rodapé -->
@@ -322,9 +449,9 @@
             </div>
             <p class="text-sm text-center sm:text-left">&copy; 2026 Projeto PAP — Dispensador Automático de Ração para Gatos.</p>
             <div class="flex space-x-6 text-sm">
-                <a href="#inicio" class="hover:text-white transition-colors">Início</a>
-                <a href="#simulador" class="hover:text-white transition-colors">Simulador</a>
-                <a href="#arquitetura" class="hover:text-white transition-colors">Materiais</a>
+                <button type="button" onclick="switchPage('home')" class="hover:text-white transition-colors">Início</button>
+                <button type="button" onclick="switchPage('calendar')" class="hover:text-white transition-colors">Calendário</button>
+                <a href="#simulador" onclick="switchPage('home')" class="hover:text-white transition-colors">Simulador</a>
             </div>
         </div>
     </footer>
@@ -357,21 +484,41 @@
             }
         }
 
-        // Carregar preferência guardada
         const savedTheme = localStorage.getItem('petfeed-theme');
-        if (savedTheme === 'dark') {
-            applyTheme(true);
-        } else {
-            applyTheme(false);
-        }
+        applyTheme(savedTheme === 'dark');
 
         themeToggleBtn.addEventListener('click', () => {
-            const isCurrentlyDark = htmlEl.classList.contains('dark');
-            const nextIsDark = !isCurrentlyDark;
+            const nextIsDark = !htmlEl.classList.contains('dark');
             applyTheme(nextIsDark);
             localStorage.setItem('petfeed-theme', nextIsDark ? 'dark' : 'light');
             showToast(nextIsDark ? 'Modo noturno ativado.' : 'Modo claro ativado.');
         });
+
+        // Navegação entre Páginas (Início / Calendário de Consumo)
+        const pageHome = document.getElementById('page-home');
+        const pageCalendar = document.getElementById('page-calendar');
+
+        function switchPage(pageName) {
+            if (pageName === 'calendar') {
+                pageHome.classList.add('hidden');
+                pageCalendar.classList.remove('hidden');
+                renderCalendar();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                pageCalendar.classList.add('hidden');
+                pageHome.classList.remove('hidden');
+            }
+
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                const isTarget = btn.getAttribute('data-nav') === pageName;
+                btn.classList.toggle('text-emerald-600', isTarget);
+                btn.classList.toggle('dark:text-emerald-400', isTarget);
+                btn.classList.toggle('font-semibold', isTarget);
+                btn.classList.toggle('text-slate-600', !isTarget);
+                btn.classList.toggle('dark:text-slate-300', !isTarget);
+                btn.classList.toggle('font-medium', !isTarget);
+            });
+        }
 
         // Menu Mobile
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -381,8 +528,8 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+        mobileMenu.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
             });
         });
@@ -401,7 +548,274 @@
             }, 3500);
         }
 
-        // Simulador do Dispensador
+        // =========================================================
+        // DADOS E LÓGICA DO CALENDÁRIO DE CONSUMO (DIAS, SEMANA, MÊS)
+        // =========================================================
+        function formatDateKey(dateObj) {
+            const y = dateObj.getFullYear();
+            const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(dateObj.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function parseDateKey(key) {
+            const [y, m, d] = key.split('-').map(Number);
+            return new Date(y, m - 1, d);
+        }
+
+        // Gerar histórico inicial de exemplo em Novembro de 2026 (até 24/11/2026)
+        function buildInitialLogs() {
+            const logs = {};
+            for (let day = 1; day <= 24; day++) {
+                const key = `2026-11-${String(day).padStart(2, '0')}`;
+                const extra = (day % 5 === 0) ? 15 : 0;
+                logs[key] = [
+                    { id: `${key}-1`, time: '08:00', label: 'Manhã', grams: 40 },
+                    { id: `${key}-2`, time: '14:30', label: 'Tarde', grams: 40 },
+                    { id: `${key}-3`, time: '20:30', label: 'Noite', grams: 45 + extra }
+                ];
+            }
+            return logs;
+        }
+
+        let consumptionLogs = buildInitialLogs();
+
+        let currentViewDate = new Date(2026, 10, 1); // Novembro 2026
+        let selectedDateKey = '2026-11-24';
+
+        const monthNames = [
+            'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+            'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+        ];
+        const weekDayShort = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
+
+        function getDayTotal(dateKey) {
+            const entries = consumptionLogs[dateKey] || [];
+            return entries.reduce((sum, item) => sum + Number(item.grams), 0);
+        }
+
+        function getWeekDates(dateKey) {
+            const base = parseDateKey(dateKey);
+            const jsDay = base.getDay(); // 0 = Dom, 1 = Seg...
+            const diffToMonday = jsDay === 0 ? -6 : 1 - jsDay;
+            const monday = new Date(base.getFullYear(), base.getMonth(), base.getDate() + diffToMonday);
+
+            const week = [];
+            for (let i = 0; i < 7; i++) {
+                const d = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + i);
+                week.push(d);
+            }
+            return week;
+        }
+
+        function renderCalendar() {
+            const year = currentViewDate.getFullYear();
+            const month = currentViewDate.getMonth();
+
+            document.getElementById('calendar-month-title').textContent = `${monthNames[month]} ${year}`;
+            document.getElementById('month-badge').textContent = monthNames[month];
+
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            const daysInMonth = lastDayOfMonth.getDate();
+
+            // Segunda = 0 ... Domingo = 6
+            const startOffset = (firstDayOfMonth.getDay() + 6) % 7;
+
+            const gridEl = document.getElementById('calendar-grid');
+            gridEl.innerHTML = '';
+
+            let monthTotal = 0;
+            let activeDaysCount = 0;
+
+            for (let i = 0; i < startOffset; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'h-16 sm:h-20 rounded-xl bg-slate-50/60 dark:bg-slate-800/30';
+                gridEl.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateObj = new Date(year, month, day);
+                const key = formatDateKey(dateObj);
+                const total = getDayTotal(key);
+                monthTotal += total;
+                if (total > 0) activeDaysCount++;
+
+                const isSelected = key === selectedDateKey;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = `h-16 sm:h-20 rounded-xl p-1.5 sm:p-2 flex flex-col justify-between items-start border transition-all text-left ${
+                    isSelected
+                        ? 'bg-emerald-600 text-white border-emerald-600 shadow-md ring-2 ring-emerald-400/50'
+                        : total > 0
+                        ? 'bg-slate-50 dark:bg-slate-800/80 border-slate-200 dark:border-slate-700 hover:border-emerald-500 text-slate-900 dark:text-white'
+                        : 'bg-white dark:bg-slate-900/40 border-slate-100 dark:border-slate-800 text-slate-400 dark:text-slate-500 hover:border-slate-300'
+                }`;
+
+                btn.innerHTML = `
+                    <span class="text-xs sm:text-sm font-bold">${day}</span>
+                    <span class="text-[11px] sm:text-xs font-semibold px-1.5 py-0.5 rounded-md ${
+                        isSelected
+                            ? 'bg-white/20 text-white'
+                            : total > 0
+                            ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400'
+                            : 'text-slate-400 dark:text-slate-600'
+                    }">${total > 0 ? total + 'g' : '0g'}</span>
+                `;
+
+                btn.addEventListener('click', () => {
+                    selectedDateKey = key;
+                    document.getElementById('log-date').value = key;
+                    renderCalendar();
+                });
+
+                gridEl.appendChild(btn);
+            }
+
+            // Total do Mês
+            document.getElementById('month-total-grams').textContent = `${monthTotal.toLocaleString('pt-PT')} g`;
+            document.getElementById('month-days-text').textContent = `${activeDaysCount} ${activeDaysCount === 1 ? 'dia com consumo' : 'dias com consumo'}`;
+
+            // Total e Detalhe da Semana do Dia Selecionado
+            const weekDates = getWeekDates(selectedDateKey);
+            let weekTotal = 0;
+            const breakdownEl = document.getElementById('week-days-breakdown');
+            breakdownEl.innerHTML = '';
+
+            weekDates.forEach((d, idx) => {
+                const k = formatDateKey(d);
+                const g = getDayTotal(k);
+                weekTotal += g;
+                const isSel = k === selectedDateKey;
+
+                const box = document.createElement('button');
+                box.type = 'button';
+                box.className = `p-2 rounded-xl border transition-all flex flex-col items-center ${
+                    isSel
+                        ? 'bg-emerald-600 text-white border-emerald-600'
+                        : 'bg-slate-50 dark:bg-slate-800/70 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-emerald-400'
+                }`;
+                box.innerHTML = `
+                    <span class="text-[10px] font-bold uppercase opacity-80">${weekDayShort[idx]}</span>
+                    <span class="text-xs font-extrabold my-0.5">${d.getDate()}</span>
+                    <span class="text-[11px] font-semibold">${g}g</span>
+                `;
+                box.addEventListener('click', () => {
+                    selectedDateKey = k;
+                    currentViewDate = new Date(d.getFullYear(), d.getMonth(), 1);
+                    document.getElementById('log-date').value = k;
+                    renderCalendar();
+                });
+                breakdownEl.appendChild(box);
+            });
+
+            const firstW = weekDates[0];
+            const lastW = weekDates[6];
+            document.getElementById('week-range-badge').textContent = `${firstW.getDate()} ${monthNames[firstW.getMonth()].slice(0, 3)} – ${lastW.getDate()} ${monthNames[lastW.getMonth()].slice(0, 3)}`;
+            document.getElementById('week-total-grams').textContent = `${weekTotal.toLocaleString('pt-PT')} g`;
+            document.getElementById('week-summary-total').textContent = `${weekTotal.toLocaleString('pt-PT')} g`;
+            document.getElementById('week-avg-text').textContent = `Média semanal: ~${Math.round(weekTotal / 7)} g / dia`;
+
+            // Detalhes do Dia Selecionado
+            const selDateObj = parseDateKey(selectedDateKey);
+            const selEntries = consumptionLogs[selectedDateKey] || [];
+            const selTotal = getDayTotal(selectedDateKey);
+
+            document.getElementById('selected-day-badge').textContent = `${selDateObj.getDate()} ${monthNames[selDateObj.getMonth()].slice(0, 3)}`;
+            document.getElementById('selected-day-grams').textContent = `${selTotal} g`;
+            document.getElementById('selected-day-meals').textContent = `${selEntries.length} ${selEntries.length === 1 ? 'dose registada neste dia' : 'doses registadas neste dia'}`;
+
+            document.getElementById('detail-date-title').textContent = `${selDateObj.getDate()} de ${monthNames[selDateObj.getMonth()]} de ${selDateObj.getFullYear()}`;
+            document.getElementById('detail-total-pill').textContent = `${selTotal} g`;
+
+            const detailListEl = document.getElementById('detail-meals-list');
+            detailListEl.innerHTML = '';
+
+            if (selEntries.length === 0) {
+                detailListEl.innerHTML = '<li class="py-6 text-center text-slate-400 text-sm">Sem doses registadas neste dia. Pode adicionar uma dose abaixo.</li>';
+            } else {
+                selEntries.forEach(entry => {
+                    const li = document.createElement('li');
+                    li.className = 'py-3 flex items-center justify-between gap-3';
+                    li.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-mono font-bold text-xs">
+                                ${entry.time}
+                            </span>
+                            <div>
+                                <p class="font-semibold text-slate-800 dark:text-slate-100">${entry.label}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold text-slate-900 dark:text-white">${entry.grams} g</span>
+                            <button type="button" onclick="removeLogEntry('${selectedDateKey}', '${entry.id}')" class="text-slate-400 hover:text-rose-500 transition-colors" title="Remover dose">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                    detailListEl.appendChild(li);
+                });
+            }
+        }
+
+        window.removeLogEntry = function(dateKey, entryId) {
+            if (!consumptionLogs[dateKey]) return;
+            consumptionLogs[dateKey] = consumptionLogs[dateKey].filter(item => item.id !== entryId);
+            if (consumptionLogs[dateKey].length === 0) {
+                delete consumptionLogs[dateKey];
+            }
+            renderCalendar();
+            showToast('Dose removida do calendário.');
+        };
+
+        document.getElementById('prev-month-btn').addEventListener('click', () => {
+            currentViewDate = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth() - 1, 1);
+            renderCalendar();
+        });
+
+        document.getElementById('next-month-btn').addEventListener('click', () => {
+            currentViewDate = new Date(currentViewDate.getFullYear(), currentViewDate.getMonth() + 1, 1);
+            renderCalendar();
+        });
+
+        // Formulário para adicionar dose manualmente no calendário
+        const addLogForm = document.getElementById('add-log-form');
+        document.getElementById('log-date').value = selectedDateKey;
+
+        addLogForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const dateVal = document.getElementById('log-date').value;
+            const timeVal = document.getElementById('log-time').value;
+            const labelVal = document.getElementById('log-label').value.trim();
+            const gramsVal = Number(document.getElementById('log-grams').value);
+
+            if (!dateVal || gramsVal <= 0) return;
+
+            if (!consumptionLogs[dateVal]) {
+                consumptionLogs[dateVal] = [];
+            }
+
+            consumptionLogs[dateVal].push({
+                id: `${dateVal}-${Date.now()}`,
+                time: timeVal,
+                label: labelVal || 'Dose',
+                grams: gramsVal
+            });
+            consumptionLogs[dateVal].sort((a, b) => a.time.localeCompare(b.time));
+
+            selectedDateKey = dateVal;
+            const dObj = parseDateKey(dateVal);
+            currentViewDate = new Date(dObj.getFullYear(), dObj.getMonth(), 1);
+
+            renderCalendar();
+            showToast(`Adicionados ${gramsVal}g em ${dateVal} às ${timeVal}.`);
+        });
+
+        // =========================================================
+        // SIMULADOR DO DISPENSADOR (NA PÁGINA INICIAL)
+        // =========================================================
         const gramsInput = document.getElementById('meal-grams');
         const gramsDisplay = document.getElementById('grams-display');
         const feederForm = document.getElementById('feeder-form');
@@ -481,10 +895,25 @@
 
         dispenseNowBtn.addEventListener('click', () => {
             const grams = Number(gramsInput.value);
+            const now = new Date();
+            const todayKey = formatDateKey(now);
+            const currentHHMM = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+            if (!consumptionLogs[todayKey]) {
+                consumptionLogs[todayKey] = [];
+            }
+            consumptionLogs[todayKey].push({
+                id: `${todayKey}-${Date.now()}`,
+                time: currentHHMM,
+                label: 'Libertação Manual',
+                grams
+            });
+            consumptionLogs[todayKey].sort((a, b) => a.time.localeCompare(b.time));
+
             systemStatusEl.textContent = `A dispensar ${grams}g de ração na taça...`;
             systemStatusEl.classList.remove('text-emerald-400');
             systemStatusEl.classList.add('text-amber-400');
-            showToast(`Motor acionado! A libertar ${grams}g de ração.`);
+            showToast(`Motor acionado! A libertar ${grams}g (registado no calendário).`);
 
             setTimeout(() => {
                 systemStatusEl.textContent = 'Dose libertada com sucesso — Em espera';

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PetFeed Auto — Projeto PAP | Dispensador Automático de Ração para Gatos</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        };
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,61 +19,72 @@
         }
         /* Fundo da secção principal com a imagem do protótipo e camada escura para leitura */
         .hero-bg {
-            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.85)), url('prototipo-pap.jpg');
+            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.72), rgba(15, 23, 42, 0.86)), url('prototipo-pap.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-600 selection:text-white flex flex-col min-h-screen">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-emerald-600 selection:text-white flex flex-col min-h-screen transition-colors duration-300">
 
     <!-- Cabeçalho Fixo -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <!-- Logótipo do Projeto -->
-                <a href="#" class="flex items-center gap-2.5 font-bold text-xl text-slate-900">
+                <a href="#" class="flex items-center gap-2.5 font-bold text-xl text-slate-900 dark:text-white">
                     <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                         </svg>
                     </span>
-                    <span>PetFeed <span class="text-emerald-600">Auto</span></span>
+                    <span>PetFeed <span class="text-emerald-600 dark:text-emerald-400">Auto</span></span>
                 </a>
 
                 <!-- Navegação Desktop -->
                 <nav class="hidden md:flex space-x-8">
-                    <a href="#inicio" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Início</a>
-                    <a href="#como-funciona" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Como Funciona</a>
-                    <a href="#simulador" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Simulador</a>
-                    <a href="#arquitetura" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Arquitetura & Hardware</a>
-                    <a href="#sobre-pap" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition-colors">Sobre a PAP</a>
+                    <a href="#inicio" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Início</a>
+                    <a href="#como-funciona" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Como Funciona</a>
+                    <a href="#simulador" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Simulador</a>
+                    <a href="#arquitetura" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Arquitetura & Materiais</a>
+                    <a href="#sobre-pap" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Sobre a PAP</a>
                 </nav>
 
-                <!-- Botão CTA Desktop -->
-                <div class="hidden md:flex">
-                    <a href="#simulador" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
+                <!-- Ações no Canto Superior Direito (Botão Tema Claro/Noturno + CTA + Menu Mobile) -->
+                <div class="flex items-center gap-2.5">
+                    <button id="theme-toggle-btn" type="button" aria-label="Alternar entre modo claro e noturno" title="Alternar modo claro / noturno" class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                        <!-- Ícone Sol (visível no modo noturno) -->
+                        <svg id="sun-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <!-- Ícone Lua (visível no modo claro) -->
+                        <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+
+                    <a href="#simulador" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors shadow-sm">
                         Testar Demonstração
                     </a>
-                </div>
 
-                <!-- Botão Menu Mobile -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 focus:outline-none" aria-label="Abrir menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+                    <!-- Botão Menu Mobile -->
+                    <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none" aria-label="Abrir menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2">
-            <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-emerald-600">Início</a>
-            <a href="#como-funciona" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-emerald-600">Como Funciona</a>
-            <a href="#simulador" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-emerald-600">Simulador</a>
-            <a href="#arquitetura" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-emerald-600">Arquitetura & Hardware</a>
-            <a href="#sobre-pap" class="block px-3 py-2 rounded-md text-base font-medium text-emerald-600 hover:bg-emerald-50">Sobre a PAP</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Início</a>
+            <a href="#como-funciona" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Como Funciona</a>
+            <a href="#simulador" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Simulador</a>
+            <a href="#arquitetura" class="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-emerald-600 dark:hover:text-emerald-400">Arquitetura & Materiais</a>
+            <a href="#sobre-pap" class="block px-3 py-2 rounded-md text-base font-medium text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-slate-800">Sobre a PAP</a>
         </div>
     </header>
 
@@ -85,58 +101,58 @@
                     Alimentação inteligente e rigorosa para o seu <span class="text-emerald-400">gato</span>
                 </h1>
                 <p class="mt-6 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed">
-                    O <strong>PetFeed Auto</strong> é um dispensador automático de ração projetado para libertar exatamente a quantidade programada nos horários definidos pelo utilizador.
+                    O <strong>PetFeed Auto</strong> é um dispensador automático de ração construído com estrutura em PVC, caixa organizada com cablagem oculta e eletrónica programável, libertando a dose exata nos horários escolhidos.
                 </p>
                 <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="#simulador" class="px-7 py-3.5 text-base font-semibold text-white bg-emerald-600 rounded-xl hover:bg-emerald-500 transition-all shadow-lg">
                         Experimentar Simulador Interativo
                     </a>
                     <a href="#arquitetura" class="px-7 py-3.5 text-base font-medium text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-xl backdrop-blur-sm transition-all">
-                        Ver Componentes Técnicos
+                        Ver Materiais e Eletrónica
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Secção Como Funciona -->
-        <section id="como-funciona" class="py-20 bg-white border-y border-slate-200">
+        <section id="como-funciona" class="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold text-slate-900">Como Funciona o Sistema</h2>
-                    <p class="mt-4 text-slate-600">O projeto resolve o problema da irregularidade alimentar e do excesso de ração através de três pilares principais.</p>
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Como Funciona o Sistema</h2>
+                    <p class="mt-4 text-slate-600 dark:text-slate-400">Uma montagem limpa e acessível, com caixa fechada e fios escondidos, que combina estrutura em PVC com controlo eletrónico preciso.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Passo 1 -->
-                    <div class="p-7 rounded-2xl bg-slate-50 border border-slate-100 hover:border-emerald-200 transition-all">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center mb-5 font-bold text-lg">
+                    <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
                             1
                         </div>
-                        <h3 class="text-xl font-semibold text-slate-900 mb-2">Agendamento de Horários</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            O utilizador define as horas exatas das refeições (ex: 08:00, 14:00 e 20:00). Um módulo relógio de tempo real (RTC) garante precisão mesmo sem internet.
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Agendamento de Horários</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            O utilizador define as horas exatas das refeições (ex: 08:00, 14:00 e 20:00). Um módulo relógio de tempo real (RTC) mantém a hora certa mesmo sem corrente.
                         </p>
                     </div>
 
                     <!-- Passo 2 -->
-                    <div class="p-7 rounded-2xl bg-slate-50 border border-slate-100 hover:border-emerald-200 transition-all">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center mb-5 font-bold text-lg">
+                    <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
                             2
                         </div>
-                        <h3 class="text-xl font-semibold text-slate-900 mb-2">Doseamento por Quantidade</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Escolha a porção em gramas (ex: 30g a 100g). O motor aciona o mecanismo dispensador pelo tempo/rotações calibradas para libertar apenas a dose escolhida.
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Doseamento por Quantidade</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            Escolha a porção em gramas (ex: 30g a 100g). O motor aciona o mecanismo doseador no interior da tubagem durante o tempo calibrado para a quantidade escolhida.
                         </p>
                     </div>
 
                     <!-- Passo 3 -->
-                    <div class="p-7 rounded-2xl bg-slate-50 border border-slate-100 hover:border-emerald-200 transition-all">
-                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 text-emerald-600 flex items-center justify-center mb-5 font-bold text-lg">
+                    <div class="p-7 rounded-2xl bg-slate-50 dark:bg-slate-800/70 border border-slate-100 dark:border-slate-700 hover:border-emerald-200 dark:hover:border-emerald-500/40 transition-all">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-5 font-bold text-lg">
                             3
                         </div>
-                        <h3 class="text-xl font-semibold text-slate-900 mb-2">Queda Direta na Taça</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            A ração armazenada no reservatório hermético cai diretamente na taça de aço inoxidável, mantendo os grãos frescos, secos e protegidos.
+                        <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">Queda por Gravidade na Taça</h3>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                            A ração armazenada no reservatório superior desce pela tubagem de PVC diretamente para o comedouro, mantendo os grãos secos e protegidos.
                         </p>
                     </div>
                 </div>
@@ -150,7 +166,7 @@
                     <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Demonstração Prática</span>
                     <h2 class="text-3xl font-bold mt-1">Simulador de Programação do Dispensador</h2>
                     <p class="mt-3 text-slate-400 text-sm sm:text-base">
-                        Experimente configurar um horário e a quantidade de ração em gramas como faria no painel de controlo do dispositivo.
+                        Experimente configurar um horário e a quantidade de ração em gramas como faria no painel de controlo do projeto.
                     </p>
                 </div>
 
@@ -219,37 +235,37 @@
             </div>
         </section>
 
-        <!-- Secção Arquitetura & Hardware -->
-        <section id="arquitetura" class="py-20 bg-white border-t border-slate-200">
+        <!-- Secção Arquitetura & Materiais -->
+        <section id="arquitetura" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl font-bold text-slate-900">Arquitetura e Componentes do Projeto</h2>
-                    <p class="mt-4 text-slate-600">Tecnologias e materiais utilizados no desenvolvimento físico e lógico do dispensador automático.</p>
+                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Arquitetura e Materiais do Projeto</h2>
+                    <p class="mt-4 text-slate-600 dark:text-slate-400">Construção limpa e de baixo custo com materiais comuns, caixa estruturada e fios escondidos no interior.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-                        <span class="text-xs font-bold text-emerald-600 uppercase">Controlador</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">Microcontrolador (ESP32 / Arduino)</h3>
-                        <p class="text-sm text-slate-600 mt-2">Cérebro do sistema responsável por ler o relógio, gerir o ecrã/interface e acionar o motor na hora certa.</p>
+                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Controlador</span>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Arduino / Microcontrolador</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Cérebro do sistema responsável por ler o relógio, gerir a programação e acionar o motor na hora certa.</p>
                     </div>
 
-                    <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-                        <span class="text-xs font-bold text-emerald-600 uppercase">Atuador</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">Servo Motor / Motor de Passo</h3>
-                        <p class="text-sm text-slate-600 mt-2">Movimenta o mecanismo rotativo (rosca sem-fim ou pás) que doseia os grãos de ração sem encravar.</p>
+                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Atuador</span>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Servo Motor / Motor</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Aciona o mecanismo doseador no interior da tubagem para libertar a quantidade definida em gramas.</p>
                     </div>
 
-                    <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-                        <span class="text-xs font-bold text-emerald-600 uppercase">Precisão Temporal</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">Módulo RTC (Real-Time Clock)</h3>
-                        <p class="text-sm text-slate-600 mt-2">Mantém a hora exata mesmo em caso de falha de energia elétrica, garantindo que o gato nunca fique sem comer.</p>
+                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Precisão Temporal</span>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Módulo RTC</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Relógio de tempo real que mantém a hora exata mesmo em caso de falha de alimentação.</p>
                     </div>
 
-                    <div class="p-6 rounded-2xl border border-slate-200 bg-slate-50">
-                        <span class="text-xs font-bold text-emerald-600 uppercase">Estrutura</span>
-                        <h3 class="text-lg font-bold text-slate-900 mt-1">Depósito & Taça Higiénica</h3>
-                        <p class="text-sm text-slate-600 mt-2">Reservatório superior vedado com rampa inclinada para queda suave diretamente na taça de alimentação.</p>
+                    <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/70">
+                        <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Acabamento & PVC</span>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">Tubagem PVC & Caixa Fechada</h3>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Tubos de PVC, depósito de ração e caixa com fios escondidos e encaixes limpos, sem marcas de cola visíveis.</p>
                     </div>
                 </div>
             </div>
@@ -257,19 +273,19 @@
 
         <!-- Secção Sobre a PAP -->
         <section id="sobre-pap" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-emerald-600 rounded-3xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-10">
+            <div class="bg-emerald-600 rounded-3xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-10 shadow-lg">
                 <div class="max-w-2xl">
                     <span class="inline-block px-3 py-1 rounded-full bg-emerald-700 text-emerald-100 text-xs font-semibold uppercase mb-3">
                         Contexto Escolar
                     </span>
                     <h2 class="text-3xl font-bold mb-4">Sobre esta Prova de Aptidão Profissional</h2>
                     <p class="text-emerald-50 leading-relaxed mb-6">
-                        Este projeto foi concebido e desenvolvido no âmbito da Prova de Aptidão Profissional (PAP), aplicando conhecimentos de eletrónica, programação, automação e desenvolvimento web para resolver uma necessidade real do quotidiano dos donos de animais de estimação.
+                        Este projeto foi concebido e desenvolvido no âmbito da Prova de Aptidão Profissional (PAP), aplicando conhecimentos de eletrónica, programação e automação para criar um protótipo funcional, bem acabado e económico.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-emerald-100">
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                            Evita obesidade e excesso de comida
+                            Acabamento limpo com fios ocultos
                         </div>
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
@@ -281,7 +297,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <svg class="w-5 h-5 text-emerald-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                            Ração sempre fresca e protegida
+                            Materiais acessíveis e fáceis de manter
                         </div>
                     </div>
                 </div>
@@ -289,7 +305,7 @@
                 <div class="w-full lg:w-auto flex-shrink-0">
                     <div class="bg-emerald-700/70 border border-emerald-400/30 rounded-2xl p-6 text-center min-w-[240px]">
                         <p class="text-xs uppercase tracking-wider text-emerald-200 font-semibold">Ano Letivo</p>
-                        <p class="text-3xl font-bold mt-1">2025 / 2026</p>
+                        <p class="text-3xl font-bold mt-1">2026 / 2027</p>
                         <p class="text-xs text-emerald-200 mt-2">Apresentação Final — PAP</p>
                     </div>
                 </div>
@@ -298,7 +314,7 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+    <footer class="bg-slate-900 dark:bg-slate-950 text-slate-400 py-10 border-t border-slate-800 transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-2 text-white font-semibold">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
@@ -308,7 +324,7 @@
             <div class="flex space-x-6 text-sm">
                 <a href="#inicio" class="hover:text-white transition-colors">Início</a>
                 <a href="#simulador" class="hover:text-white transition-colors">Simulador</a>
-                <a href="#arquitetura" class="hover:text-white transition-colors">Componentes</a>
+                <a href="#arquitetura" class="hover:text-white transition-colors">Materiais</a>
             </div>
         </div>
     </footer>
@@ -323,6 +339,40 @@
 
     <!-- Scripts Interativos -->
     <script>
+        // Alternar Modo Claro / Noturno
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const htmlEl = document.documentElement;
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                htmlEl.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                htmlEl.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        // Carregar preferência guardada
+        const savedTheme = localStorage.getItem('petfeed-theme');
+        if (savedTheme === 'dark') {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isCurrentlyDark = htmlEl.classList.contains('dark');
+            const nextIsDark = !isCurrentlyDark;
+            applyTheme(nextIsDark);
+            localStorage.setItem('petfeed-theme', nextIsDark ? 'dark' : 'light');
+            showToast(nextIsDark ? 'Modo noturno ativado.' : 'Modo claro ativado.');
+        });
+
         // Menu Mobile
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
